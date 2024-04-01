@@ -9,8 +9,61 @@ const cartDB = require('../models/cartSchema');
 const ordersDB = require('../models/orderSchema');
 const RegisterDB = require('../models/registerSchema');
 const loginDB = require('../models/loginSchema');
+const productsDB = require('../models/productSchema');
 const userRoutes = express.Router();
 
+userRoutes.get('/view-products', async (req, res) => {
+  try {
+    const Data = await productsDB.find();
+    if (Data) {
+      return res.status(201).json({
+        Success: true,
+        Error: false,
+        data: Data,
+        Message: 'Products fetched successfully',
+      });
+    } else {
+      return res.status(400).json({
+        Success: false,
+        Error: true,
+        Message: 'Failed fetching Products ',
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      Success: false,
+      Error: true,
+      Message: 'Internal Server Error',
+      ErrorMessage: error.message,
+    });
+  }
+});
+userRoutes.get('/view-product/:id', async (req, res) => {
+  try {
+    const Data = await productsDB.find({ _id: req.params.id });
+    if (Data) {
+      return res.status(201).json({
+        Success: true,
+        Error: false,
+        data: Data,
+        Message: 'Product fetched successfully',
+      });
+    } else {
+      return res.status(400).json({
+        Success: false,
+        Error: true,
+        Message: 'Failed fetching Product ',
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      Success: false,
+      Error: true,
+      Message: 'Internal Server Error',
+      ErrorMessage: error.message,
+    });
+  }
+});
 userRoutes.put('/update-user-profile/:id', async (req, res) => {
   try {
     const id = req.params.id;
