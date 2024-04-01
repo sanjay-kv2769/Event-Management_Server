@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="description" content="Vali is a responsive and free admin theme built with Bootstrap 5, SASS and PUG.js. It's fully customizable and modular.">
+    <!-- Twitter meta-->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:site" content="@pratikborsadiya">
+    <meta property="twitter:creator" content="@pratikborsadiya">
+    <!-- Open Graph Meta-->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Vali Admin">
+    <meta property="og:title" content="Vali - Free Bootstrap 5 admin theme">
+    <meta property="og:url" content="http://pratikborsadiya.in/blog/vali-admin">
+    <meta property="og:image" content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png">
+    <meta property="og:description" content="Vali is a responsive and free admin theme built with Bootstrap 5, SASS and PUG.js. It's fully customizable and modular.">
+    <title>View Complaints</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Main CSS-->
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <!-- Font-icon css-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+  </head>
+  <body class="app sidebar-mini">
+    <!-- Navbar-->
+    
+    <%- include('./modules/header') %>
+
+    <!-- Sidebar menu-->
+    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+    
+    <%- include('./modules/sidebar') %>
+
+    <main class="app-content">
+      <div class="app-title">
+        <div>
+          <h1><i class="bi bi-table"></i>View Complaints</h1>
+        </div>
+        <ul class="app-breadcrumb breadcrumb">
+          <li class="breadcrumb-item"><i class="bi bi-house-door fs-6"></i></li>
+          <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
+          <li class="breadcrumb-item active">View Complaints</li>
+        </ul>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="tile">
+            <h3 class="tile-title">Complaints details</h3>
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th></th>
+                  <th>Complaint</th>
+                  <!-- <th>Purpose</th> -->
+                  <!-- <th>Description</th> -->
+                  <!-- <th>Quantity</th> -->
+                  <!-- <th>stock</th> -->
+                  <!-- <th>Price</th> -->
+                </tr>
+              </thead>
+              <tbody>
+                <% for(i=0;i<Data.length;i++){%>
+                <tr>
+                  <td>1</td>
+                  <td><%= Data[i].register_data.name%></td>
+                  <td><%= Data[i].login_data.email%></td>
+                  <td><%= Data[i].register_data.phone%></td>
+                  <td></td>
+                  <td><%= Data[i].complaint%></td>
+                  <!-- <td><%= Data[i].purpose%></td>
+                  <td><%= Data[i].description%></td>
+                  <td><%= Data[i].quantity%></td>
+                  <td><%= Data[i].stock%></td>
+                  <td><%= Data[i].price%></td> -->
+                  <!-- <td><img src="<%= Data[i].image%>" width="50" height="50" alt=""></td> -->
+                    <!-- <form
+                  action="/api/admin/edit-med/<%= Data[i]._id %>"
+                method="GET"
+                  >
+                  <td><button class="btn btn-warning">Update</button></td>
+                  </form>  -->
+                    <!-- <form
+                  action="/api/admin/delete-med/<%= Data[i]._id %>"
+                method="GET"
+                  >
+                  <td><button class="btn btn-danger">Delete</button></td>
+                  </form> -->
+
+                </tr>
+               <%}%>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </main>
+    <!-- Essential javascripts for application to work-->
+    <script src="js/jquery-3.7.0.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/main.js"></script>
+    <!-- Page specific javascripts-->
+    <!-- Google analytics script-->
+    <script type="text/javascript">
+      if(document.location.hostname == 'pratikborsadiya.in') {
+      	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+      	ga('create', 'UA-72504830-1', 'auto');
+      	ga('send', 'pageview');
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta
+      name="description"
+      content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular."
+    />
+    <!-- Twitter meta-->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:site" content="@pratikborsadiya" />
+    <meta property="twitter:creator" content="@pratikborsadiya" />
+    <!-- Open Graph Meta-->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Vali Admin" />
+    <meta property="og:title" content="Vali - Free Bootstrap 4 admin theme" />
+    <meta
+      property="og:url"
+      content="http://pratikborsadiya.in/blog/vali-admin"
+    />
+    <meta
+      property="og:image"
+      content="http://pratikborsadiya.in/blog/vali-admin/hero-social.png"
+    />
+    <meta
+      property="og:description"
+      content="Vali is a responsive and free admin theme built with Bootstrap 4, SASS and PUG.js. It's fully customizable and modular."
+    />
+    <title>Book My Turf</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Main CSS-->
+    <link rel="stylesheet" type="text/css" href="/css/main.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+    <!-- Font-icon css-->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+  </head>
+
+  <body class="app sidebar-mini">
+    <header class="app-header">
+      <a class="app-header__logo" href="index.html">medicine management</a>
+      <a
+        class="app-sidebar__toggle"
+        href="#"
+        data-toggle="sidebar"
+        aria-label="Hide Sidebar"
+      ></a>
+      <ul class="app-nav">
+        <li class="dropdown">
+          <a
+            class="app-nav__item"
+            href="#"
+            data-bs-toggle="dropdown"
+            aria-label="Open Profile Menu"
+            ><i class="bi bi-person fs-4"></i
+          ></a>
+          <ul class="dropdown-menu settings-menu dropdown-menu-right">
+            <li>
+              <a class="dropdown-item" href="page-login.html"
+                ><i class="bi bi-box-arrow-right me-2 fs-5"></i> Logout</a
+              >
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </header>
+
+    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+
+    <%- include('./modules/sidebar') %>
+
+    <main class="app-content">
+      <div class="app-title">
+        <div>
+          <h1><i class="bi bi-ui-checks"></i> Edit Medicine</h1>
+        </div>
+        <ul class="app-breadcrumb breadcrumb">
+          <li class="breadcrumb-item"><i class="bi bi-house-door fs-6"></i></li>
+          <li class="breadcrumb-item"><a href="/admin">Dashboard</a></li>
+          <li class="breadcrumb-item"><a href="">Edit Medicine</a></li>
+        </ul>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="tile">
+            <h3 class="tile-title">Edit Medicine</h3>
+
+            <% if (data.Error==true) { %>
+            <div class="alert alert-danger" role="alert">
+              <%= data.Message %>
+            </div>
+            <% } %> <% if (data.Error==false) { %>
+            <div class="alert alert-success" role="alert">
+              <%= data.Message %>
+            </div>
+            <% } %>
+            <div class="tile-body">
+              <form
+                action="/api/admin/add-med"
+                method="post"
+                enctype="multipart/form-data"
+              >
+                <div class="mb-3">
+                  <label class="form-label">Medicine Name</label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    name="medicine"
+                    value="<%= Data.medicine %>"
+                    placeholder="Enter Medicine Name"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Composition</label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    name="composition"
+                    value="<%= Data.composition %>"
+                    placeholder="Enter composition"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Brand</label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    name="brand"
+                    value="<%= Data.brand %>"
+
+                    placeholder="Enter brand"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Strength</label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    name="strength"
+                    value="<%= Data.strength %>"
+
+                    placeholder="Enter strength"
+                  />
+                <div class="mb-3">
+                  <label class="form-label">Quantity</label>
+                  <input
+                    class="form-control"
+                    type="number"
+                    name="quantity"
+                    value="<%= Data.quantity %>"
+
+                    placeholder="Enter quantity"
+                  />
+                <div class="mb-3">
+                  <label class="form-label">Purpose</label>
+                  <input
+                    class="form-control"
+                    type="text"
+                    name="purpose"
+                    value="<%= Data.purpose %>"
+
+                    placeholder="Enter purpose"
+                  />
+                <div class="mb-3">
+                  <label class="form-label">Price</label>
+                  <input
+                    class="form-control"
+                    type="number"
+                    name="price"
+                    value="<%= Data.price %>"
+
+                    placeholder="Enter price"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Description</label>
+                  <textarea
+                    class="form-control"
+                    rows="4"
+                    name="description"
+                    placeholder="Enter description"
+                  ><%= Data.description %></textarea>
+                </div>
+
+                <div class="mb-3">
+                  <label class="form-label">Image</label>
+                  <input
+                    class="form-control"
+                    name="image"
+
+                    type="file"
+                  />
+                </div>
+                <div class="tile-footer">
+                  <button class="btn btn-primary" type="submit">
+                    <i class="bi bi-check-circle-fill me-2"></i>Save
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- Essential javascripts for application to work-->
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    <script src="/js/popper.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/main.js"></script>
+    <!-- The javascript plugin to display page loading on top-->
+    <script src="/js/plugins/pace.min.js"></script>
+    <!-- Page specific javascripts-->
+    <script
+      type="text/javascript"
+      src="/js/plugins/bootstrap-datepicker.min.js"
+    ></script>
+    <script type="text/javascript" src="/js/plugins/select2.min.js"></script>
+    <script
+      type="text/javascript"
+      src="/js/plugins/bootstrap-datepicker.min.js"
+    ></script>
+    <script type="text/javascript" src="/js/plugins/dropzone.js"></script>
+    <script type="text/javascript">
+      $('#sl').on('click', function () {
+        $('#tl').loadingBtn();
+        $('#tb').loadingBtn({ text: 'Signing In' });
+      });
+
+      $('#el').on('click', function () {
+        $('#tl').loadingBtnComplete();
+        $('#tb').loadingBtnComplete({ html: 'Sign In' });
+      });
+
+      $('#demoDate').datepicker({
+        format: 'dd/mm/yyyy',
+        autoclose: true,
+        todayHighlight: true,
+      });
+
+      $('#demoSelect').select2();
+    </script>
+    <!-- Google analytics script-->
+    <script type="text/javascript">
+      if (document.location.hostname == 'pratikborsadiya.in') {
+        (function (i, s, o, g, r, a, m) {
+          i['GoogleAnalyticsObject'] = r;
+          (i[r] =
+            i[r] ||
+            function () {
+              (i[r].q = i[r].q || []).push(arguments);
+            }),
+            (i[r].l = 1 * new Date());
+          (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+          a.async = 1;
+          a.src = g;
+          m.parentNode.insertBefore(a, m);
+        })(
+          window,
+          document,
+          'script',
+          '//www.google-analytics.com/analytics.js',
+          'ga'
+        );
+        ga('create', 'UA-72504830-1', 'auto');
+        ga('send', 'pageview');
+      }
+    </script>
+  </body>
+</html>
