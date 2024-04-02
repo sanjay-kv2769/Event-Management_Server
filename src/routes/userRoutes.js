@@ -12,6 +12,9 @@ const loginDB = require('../models/loginSchema');
 const productsDB = require('../models/productSchema');
 const userRoutes = express.Router();
 
+
+
+
 userRoutes.get('/view-products', async (req, res) => {
   try {
     const Data = await productsDB.find();
@@ -428,6 +431,34 @@ userRoutes.get('/view-order/:login_id', async (req, res) => {
       Message: 'Order data fetched successfully',
     });
     // return res.send(result);
+  } catch (error) {
+    return res.status(500).json({
+      Success: false,
+      Error: true,
+      Message: 'Internal Server Error',
+      ErrorMessage: error.message,
+    });
+  }
+});
+
+
+userRoutes.get('/view-events', async (req, res) => {
+  try {
+    const Data = await eventDB.find();
+    if (Data) {
+      return res.status(201).json({
+        Success: true,
+        Error: false,
+        data: Data,
+        Message: 'Events fetched successfully',
+      });
+    } else {
+      return res.status(400).json({
+        Success: false,
+        Error: true,
+        Message: 'Failed fetching Events ',
+      });
+    }
   } catch (error) {
     return res.status(500).json({
       Success: false,
