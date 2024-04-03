@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs');
 
 loginRoutes.post('/', async (req, res) => {
   try {
-    console.log(req.body);
+    // console.log(req.body);
     if (req.body.email && req.body.password) {
       const oldUser = await loginDB.findOne({
         email: req.body.email,

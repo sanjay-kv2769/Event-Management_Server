@@ -1,6 +1,5 @@
 const express = require('express');
 const medicineDB = require('../models/eventSchema');
-const physicianDB = require('../models/physicianSchema');
 const RegisterDB = require('../models/registerSchema');
 const { default: mongoose } = require('mongoose');
 const staffDB = require('../models/staffSchema');
@@ -95,7 +94,7 @@ commonRoutes.get('/profile/staff/:id', async (req, res) => {
         },
       },
     ]);
-    console.log('Profile', profileData);
+    // console.log('Profile', profileData);
     if (profileData.length > 0) {
       return res.json({
         Success: true,
@@ -111,7 +110,7 @@ commonRoutes.get('/profile/staff/:id', async (req, res) => {
       });
     }
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return res.status(500).json({
       Success: false,
       Error: true,
@@ -182,7 +181,7 @@ commonRoutes.get('/profile/user/:id', async (req, res) => {
         },
       },
     ]);
-    console.log('Profile', profileData);
+    // console.log('Profile', profileData);
     if (profileData.length > 0) {
       return res.json({
         Success: true,
@@ -198,7 +197,7 @@ commonRoutes.get('/profile/user/:id', async (req, res) => {
       });
     }
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     return res.status(500).json({
       Success: false,
       Error: true,

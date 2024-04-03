@@ -8,7 +8,6 @@ const registerRoutes = require('./src/routes/registerRoutes');
 const loginRoutes = require('./src/routes/loginRoutes');
 const userRoutes = require('./src/routes/userRoutes');
 const commonRoutes = require('./src/routes/commonRoutes');
-const physicianRoutes = require('./src/routes/physicianRoutes');
 const staffRoutes = require('./src/routes/staffRoutes');
 
 mongoose
@@ -34,15 +33,14 @@ app.use('/api', commonRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/staff', staffRoutes);
-app.use('/api/physician', physicianRoutes);
 app.use('/api/register', registerRoutes);
 app.use('/api/login', loginRoutes);
 
 app.get('/', (req, res) => {
-  res.send('hello world');
+  res.render('login.ejs', { Message: '' });
 });
 
-const PORT = 8080;
+const PORT = 8082;
 app.listen(PORT, () => {
   console.log('Server started on', PORT);
 });

@@ -4,7 +4,6 @@ const registerDB = require('../models/registerSchema');
 const registerRoutes = express.Router();
 const bcrypt = require('bcryptjs');
 const staffDB = require('../models/staffSchema');
-const physicianDB = require('../models/physicianSchema');
 
 //User Registration
 registerRoutes.post('/user', async (req, res) => {
@@ -56,7 +55,7 @@ registerRoutes.post('/user', async (req, res) => {
       });
     }
   } catch (error) {
-    console.error(error);
+    // console.error(error);
     return res.status(500).json({
       Success: false,
       Error: true,
@@ -67,9 +66,9 @@ registerRoutes.post('/user', async (req, res) => {
 
 //Staff Registration
 registerRoutes.post('/staff', async (req, res) => {
-  console.log(req.body);
+  // console.log(req.body);
   try {
-    console.log(req.body);
+    // console.log(req.body);
     const oldStaff = await loginDB.findOne({ email: req.body.email });
     if (oldStaff) {
       // return res.status(400).json({
@@ -146,7 +145,7 @@ registerRoutes.post('/staff', async (req, res) => {
       return res.render('add-staff', { data });
     }
   } catch (error) {
-    console.error(error);
+    // console.error(error);
     return res.status(500).json({
       Success: false,
       Error: true,
@@ -155,75 +154,12 @@ registerRoutes.post('/staff', async (req, res) => {
   }
 });
 
-//Physician Registration
-registerRoutes.post('/physician', async (req, res) => {
-  try {
-    console.log(req.body);
-    const oldPhysician = await loginDB.findOne({ email: req.body.email });
-    if (oldPhysician) {
-      return res.status(400).json({
-        Success: false,
-        Error: true,
-        Message: 'Email already exist, Please Log In',
-      });
-    }
-    const oldPhysicianPhone = await physicianDB.findOne({
-      phone: req.body.phone,
-    });
-    if (oldPhysicianPhone) {
-      return res.status(400).json({
-        Success: false,
-        Error: true,
-        Message: 'Phone already exist',
-      });
-    }
 
-    const hashedPassword = await bcrypt.hash(req.body.password, 12);
-    let log = {
-      email: req.body.email,
-      password: hashedPassword,
-      rawpassword: req.body.password,
-      role: 4,
-    };
-    const result3 = await loginDB(log).save();
-    let reg = {
-      login_id: result3._id,
-      name: req.body.name,
-      phone: req.body.phone,
-      place: req.body.place,
-      // designation: req.body.designation,
-    };
-    const result4 = await physicianDB(reg).save();
-
-    if (result4) {
-      return res.json({
-        Success: true,
-        Error: false,
-        logdata: result3,
-        regdata: result4,
-        Message: 'Physician Registration Successful',
-      });
-    } else {
-      return res.json({
-        Success: false,
-        Error: true,
-        Message: 'Registration Failed',
-      });
-    }
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({
-      Success: false,
-      Error: true,
-      Message: 'Internal Server Error',
-    });
-  }
-});
 
 //Change password
 registerRoutes.put('/pass-change/:login_id', async (req, res) => {
   const loginData = await loginDB.findOne({ _id: req.params.login_id });
-  console.log(loginData);
+  // console.log(loginData);
   const confirmPassword = await bcrypt.compare(
     req.body.password,
     loginData.password
@@ -257,7 +193,7 @@ registerRoutes.put('/pass-change/:login_id', async (req, res) => {
         }
       );
     }
-    console.log(updatePassword);
+    // console.log(updatePassword);
     if (updatePassword) {
       return res.status(200).json({
         Success: true,

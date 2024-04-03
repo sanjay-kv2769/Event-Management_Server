@@ -126,7 +126,7 @@ staffRoutes.put('/update-product/:id', async (req, res) => {
       description: req.body ? req.body.description : previousData.description,
       image: req.file ? req.file.path : previousData.image,
     };
-    console.log(Products);
+    // console.log(Products);
     const Data = await productsDB.updateOne(
       { _id: req.params.id },
       { $set: Products }
@@ -279,7 +279,7 @@ staffRoutes.put('/update-event/:id', async (req, res) => {
       price: req.body ? req.body.price : previousData.price,
       image: req.file ? req.file.path : previousData.image,
     };
-    console.log(Events);
+    // console.log(Events);
     const Data = await eventDB.updateOne(
       { _id: req.params.id },
       { $set: Events }
@@ -347,13 +347,13 @@ staffRoutes.get('/delete-event/:id', async (req, res) => {
         Success: true,
         Error: false,
         data: Data,
-        Message: 'Product deleted successfully',
+        Message: 'Event deleted successfully',
       });
     } else {
       return res.status(400).json({
         Success: false,
         Error: true,
-        Message: 'Failed to delete product',
+        Message: 'Failed to delete Event',
       });
     }
     // if (Data.deletedCount == 1) {
@@ -466,7 +466,7 @@ staffRoutes.get('/view-orders', async (req, res) => {
         },
       },
     ]);
-    console.log('result', result);
+    // console.log('result', result);
     if (result) {
       return res.status(200).json({
         Success: true,

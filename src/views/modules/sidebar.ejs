@@ -1,122 +1,88 @@
-<aside class="app-sidebar">
-  <ul class="app-menu">
-    <li>
-      <a class="app-menu__item active" href="/api/admin"
-        ><i class="app-menu__icon bi bi-speedometer"></i
-        ><span class="app-menu__label">Dashboard</span></a
-      >
-    </li>
-    <li class="treeview">
-      <a class="app-menu__item" href="#" data-toggle="treeview"
-        ><i class="app-menu__icon bi bi-laptop"></i
-        ><span class="app-menu__label">Manage Medicines</span
-        ><i class="treeview-indicator bi bi-chevron-right"></i
-      ></a>
-      <ul class="treeview-menu">
-        <li>
-          <a class="treeview-item" href="/api/admin/add-medicine"
-            ><i class="icon bi bi-circle-fill"></i> Add Medicine</a
-          >
-        </li>
-        <li>
-          <a class="treeview-item" href="/api/admin/view-med"
-            ><i class="icon bi bi-circle-fill"></i> View Medicine</a
-          >
-        </li>
-      </ul>
-    </li>
-    <li class="treeview">
-      <a class="app-menu__item" href="#" data-toggle="treeview"
-        ><i class="app-menu__icon bi bi-ui-checks"></i
-        ><span class="app-menu__label">Manage Staff</span
-        ><i class="treeview-indicator bi bi-chevron-right"></i
-      ></a>
-      <ul class="treeview-menu">
-        <li>
-          <a class="treeview-item" href="/api/admin/new-staff"
-            ><i class="icon bi bi-circle-fill"></i> Add Staff</a
-          >
-        </li>
-        <li>
-          <a class="treeview-item" href="/api/admin/view-staff"
-            ><i class="icon bi bi-circle-fill"></i> View Staff</a
-          >
-        </li>
-        <li>
-          <a class="treeview-item" href="/api/admin/view-attendance"
-            ><i class="icon bi bi-circle-fill"></i> View attendance</a
-          >
-        </li>
-      </ul>
-    </li>
-    <li class="treeview">
-      <a class="app-menu__item" href="#" data-toggle="treeview"
-        ><i class="app-menu__icon bi bi-table"></i
-        ><span class="app-menu__label">Complaints</span
-        ><i class="treeview-indicator bi bi-chevron-right"></i
-      ></a>
-      <ul class="treeview-menu">
-        <li>
-          <a class="treeview-item" href="/api/admin/view-complaints"
-            ><i class="icon bi bi-circle-fill"></i> View Complaints</a
-          >
-        </li>
-        <!-- <li>
-          <a class="treeview-item" href="table-data-table.html"
-            ><i class="icon bi bi-circle-fill"></i> Data Tables</a
-          >
-        </li> -->
-      </ul>
-    </li>
-    <!-- <li class="treeview">
-      <a class="app-menu__item" href="#" data-toggle="treeview"
-        ><i class="app-menu__icon bi bi-file-earmark"></i
-        ><span class="app-menu__label">Pages</span
-        ><i class="treeview-indicator bi bi-chevron-right"></i
-      ></a>
-      <ul class="treeview-menu">
-        <li>
-          <a class="treeview-item" href="blank-page.html"
-            ><i class="icon bi bi-circle-fill"></i> Blank Page</a
-          >
-        </li>
-        <li>
-          <a class="treeview-item" href="page-login.html"
-            ><i class="icon bi bi-circle-fill"></i> Login Page</a
-          >
-        </li>
-        <li>
-          <a class="treeview-item" href="page-lockscreen.html"
-            ><i class="icon bi bi-circle-fill"></i> Lockscreen Page</a
-          >
-        </li>
-        <li>
-          <a class="treeview-item" href="page-user.html"
-            ><i class="icon bi bi-circle-fill"></i> User Page</a
-          >
-        </li>
-        <li>
-          <a class="treeview-item" href="page-invoice.html"
-            ><i class="icon bi bi-circle-fill"></i> Invoice Page</a
-          >
-        </li>
-        <li>
-          <a class="treeview-item" href="page-mailbox.html"
-            ><i class="icon bi bi-circle-fill"></i> Mailbox</a
-          >
-        </li>
-        <li>
-          <a class="treeview-item" href="page-error.html"
-            ><i class="icon bi bi-circle-fill"></i> Error Page</a
-          >
-        </li>
-      </ul>
-    </li>
-    <li>
-      <a class="app-menu__item" href="docs.html"
-        ><i class="app-menu__icon bi bi-code-square"></i
-        ><span class="app-menu__label">Docs</span></a
-      >
-    </li> -->
-  </ul>
+<aside>
+  <div id="sidebar" class="nav-collapse">
+    <!-- sidebar menu start-->
+    <ul class="sidebar-menu" id="nav-accordion">
+      <p class="centered">
+        <!-- <a href="profile.html"
+          ><img src="/img/ui-sam.jpg" class="img-circle" width="60"
+        /></a> -->
+      </p>
+      <h2 class="centered" style="color: rgb(213, 188, 188); font-weight: 600">
+        Event Management System
+      </h2>
+
+      <li class="mt">
+        <a class="active" href="/">
+          <i class="fa fa-dashboard"></i>
+          <span>Dashboard</span>
+        </a>
+      </li>
+
+      <li class="sub-menu">
+        <a href="javascript:;">
+          <i class="fa fa-desktop"></i>
+          <span>Manage Event</span>
+        </a>
+        <ul class="sub">
+          <li><a href="/api/admin/add-event">Add event</a></li>
+          <li><a href="/api/admin/view-event">View event</a></li>
+          <!-- <li><a href="panels.html">Panels</a></li> -->
+        </ul>
+      </li>
+
+      <li class="sub-menu">
+        <a href="javascript:;">
+          <i class="fa fa-cogs"></i>
+          <span>Manage Staff</span>
+        </a>
+        <ul class="sub">
+          <li><a href="/api/admin/new-staff">Add Staff</a></li>
+          <li><a href="/api/admin/view-staff">View Staff</a></li>
+          <li><a href="/api/admin/view-attendance">View Attendance</a></li>
+        </ul>
+      </li>
+      <li class="sub-menu">
+        <a href="javascript:;">
+          <i class="fa fa-book"></i>
+          <span>Complaints</span>
+        </a>
+        <ul class="sub">
+          <li><a href="/api/admin/view-complaints">View Complaints</a></li>
+          <!-- <li><a href="login.html">Login</a></li>
+          <li><a href="lock_screen.html">Lock Screen</a></li> -->
+        </ul>
+      </li>
+      <li class="sub-menu">
+        <a href="javascript:;">
+          <i class="fa fa-tasks"></i>
+          <span>Manage Products</span>
+        </a>
+        <ul class="sub">
+          <li><a href="/api/admin/add-product">Add Product</a></li>
+          <li><a href="/api/admin/view-product">View Products</a></li>
+        </ul>
+      </li>
+      <!-- <li class="sub-menu">
+        <a href="javascript:;">
+          <i class="fa fa-th"></i>
+          <span>Data Tables</span>
+        </a>
+        <ul class="sub">
+          <li><a href="basic_table.html">Basic Table</a></li>
+          <li><a href="responsive_table.html">Responsive Table</a></li>
+        </ul>
+      </li> -->
+      <!-- <li class="sub-menu">
+        <a href="javascript:;">
+          <i class="fa fa-bar-chart-o"></i>
+          <span>Charts</span>
+        </a>
+        <ul class="sub">
+          <li><a href="morris.html">Morris</a></li>
+          <li><a href="chartjs.html">Chartjs</a></li>
+        </ul>
+      </li> -->
+    </ul>
+    <!-- sidebar menu end-->
+  </div>
 </aside>

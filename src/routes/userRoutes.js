@@ -12,9 +12,6 @@ const loginDB = require('../models/loginSchema');
 const productsDB = require('../models/productSchema');
 const userRoutes = express.Router();
 
-
-
-
 userRoutes.get('/view-products', async (req, res) => {
   try {
     const Data = await productsDB.find();
@@ -273,7 +270,7 @@ userRoutes.get('/view-cart/:login_id', async (req, res) => {
         },
       },
     ]);
-    console.log(cartProducts);
+    // console.log(cartProducts);
     if (cartProducts) {
       return res.status(200).json({
         Success: true,
@@ -394,7 +391,7 @@ userRoutes.post('/add-address/:login_id', async (req, res) => {
 userRoutes.get('/view-order/:login_id', async (req, res) => {
   try {
     const login_id = req.params.login_id;
-    console.log(login_id);
+    // console.log(login_id);
     const result = await ordersDB.aggregate([
       {
         $match: {
@@ -440,7 +437,6 @@ userRoutes.get('/view-order/:login_id', async (req, res) => {
     });
   }
 });
-
 
 userRoutes.get('/view-events', async (req, res) => {
   try {
@@ -507,7 +503,7 @@ userRoutes.post('/book-event/:login_id/:event_id', async (req, res) => {
 userRoutes.get('/view-booking/:login_id', async (req, res) => {
   try {
     const login_id = req.params.login_id;
-    console.log(login_id);
+    // console.log(login_id);
     const result = await bookingsDB.aggregate([
       {
         $match: {
