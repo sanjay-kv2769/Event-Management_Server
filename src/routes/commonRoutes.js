@@ -1,13 +1,13 @@
 const express = require('express');
-const medicineDB = require('../models/eventSchema');
 const RegisterDB = require('../models/registerSchema');
 const { default: mongoose } = require('mongoose');
 const staffDB = require('../models/staffSchema');
+const productsDB = require('../models/productSchema');
 const commonRoutes = express.Router();
 
 commonRoutes.get('/view-prod', async (req, res) => {
   try {
-    const Data = await medicineDB.find();
+    const Data = await productsDB.find();
     if (Data) {
       return res.status(200).json({
         Success: true,

@@ -1,5 +1,4 @@
 const express = require('express');
-const medicineDB = require('../models/eventSchema');
 const staffDB = require('../models/staffSchema');
 const loginDB = require('../models/loginSchema');
 const bcrypt = require('bcryptjs');
@@ -13,6 +12,9 @@ const cloudinary = require('cloudinary').v2;
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
 const eventDB = require('../models/eventSchema');
 const productsDB = require('../models/productSchema');
+const feedbacksDB = require('../models/feedbackSchema');
+const ordersDB = require('../models/orderSchema');
+const bookingsDB = require('../models/bookingSchema');
 
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,
@@ -22,7 +24,7 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
-    folder: 'vatakara projects/medicine management',
+    folder: 'vatakara projects/event management',
   },
 });
 const upload = multer({ storage: storage });
@@ -57,7 +59,26 @@ adminRoutes.post('/login', async (req, res, next) => {
 // ------------------------------Events--------------------------------------
 
 adminRoutes.get('/', async (req, res) => {
-  res.render('dashboard');
+  try {
+    const staffCount = await staffDB.countDocuments();
+    const eventCount = await eventDB.countDocuments();
+    const reviewCount = await feedbacksDB.countDocuments();
+    const complaintCount = await complaintsDB.countDocuments();
+    const bookingCount = await bookingsDB.countDocuments();
+
+    res.render('dashboard', {
+      staffCount,
+      eventCount,
+      reviewCount,
+      complaintCount,
+      bookingCount,
+    });
+    // Send the counts as a response
+    //  res.json({ staffCount, medicineCount, reviewCount, complaintCount });
+  } catch (error) {
+    console.error('Error occurred:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
 });
 
 // =====================================product======================
@@ -194,7 +215,7 @@ adminRoutes.post(
       //   Success: true,
       //   Error: false,
       //   data: Data,
-      //   Message: 'Medicine updated successfully',
+      //   Message: 'product updated successfully',
       // });
       // }
       if (Data.modifiedCount == 1) {
@@ -204,7 +225,7 @@ adminRoutes.post(
         // return res.status(400).json({
         //   Success: false,
         //   Error: true,
-        //   Message: 'Failed while updating Medicine',
+        //   Message: 'Failed while updating product',
         // });
         return res.redirect('/api/admin/view-product');
       }
@@ -387,7 +408,7 @@ adminRoutes.post(
       //   Success: true,
       //   Error: false,
       //   data: Data,
-      //   Message: 'Medicine updated successfully',
+      //   Message: 'product updated successfully',
       // });
       // }
       if (Data.modifiedCount == 1) {
@@ -397,7 +418,7 @@ adminRoutes.post(
         // return res.status(400).json({
         //   Success: false,
         //   Error: true,
-        //   Message: 'Failed while updating Medicine',
+        //   Message: 'Failed while updating product',
         // });
         return res.redirect('/api/admin/view-event');
       }
@@ -763,7 +784,7 @@ adminRoutes.get('/update-staff/:id', async (req, res) => {
       // return res.status(400).json({
       //   Success: false,
       //   Error: true,
-      //   Message: 'Failed while updating Medicine',
+      //   Message: 'Failed while updating staff',
       // });
       return res.redirect('/api/admin/view-staff');
     }
@@ -896,7 +917,7 @@ adminRoutes.get('/reply-complaint/:id/:date', async (req, res) => {
       // return res.status(400).json({
       //   Success: false,
       //   Error: true,
-      //   Message: 'Failed while updating Medicine',
+      //   Message: 'Failed while updating complaints',
       // });
       return res.redirect('/api/admin/view-complaints');
     }
@@ -1023,6 +1044,66 @@ adminRoutes.get('/view-attendance/:login_id', async (req, res) => {
     // res.json({ attendance: staff.attendance });
   } catch (error) {
     // console.error(error);
+    return res.status(500).json({
+      Success: false,
+      Error: true,
+      Message: 'Internal Server Error',
+      ErrorMessage: error.message,
+    });
+  }
+});
+
+adminRoutes.get('/view-feedback', async (req, res) => {
+  try {
+    // const staffData = await staffDB.aggregate([
+    const Data = await feedbacksDB.aggregate([
+      {
+        $lookup: {
+          from: 'login_tbs',
+          localField: 'login_id',
+          foreignField: '_id',
+          as: 'login_data',
+        },
+      },
+      {
+        $unwind: '$login_data',
+      },
+      {
+        $lookup: {
+          from: 'register_tbs',
+          localField: 'login_id',
+          foreignField: 'login_id',
+          as: 'register_data',
+        },
+      },
+      {
+        $unwind: '$register_data',
+      },
+    ]);
+
+    // if (staffData.length > 0) {
+    if (Data.length > 0) {
+      //   return res.json({
+      //     Success: true,
+      //     Error: false,
+      //     data: Data,
+      //     Message: 'Success',
+      //   });
+      const data = {};
+      return res.render('view-feedback', { Data, data });
+    } else {
+      // return res.json({
+      //   Success: false,
+      //   Error: true,
+      //   Message: 'Failed',
+      // });
+      const data = {
+        Message: ' Error',
+      };
+      const Data = [];
+      return res.render('view-feedback', { Data, data });
+    }
+  } catch (error) {
     return res.status(500).json({
       Success: false,
       Error: true,

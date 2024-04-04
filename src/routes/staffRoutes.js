@@ -1,5 +1,4 @@
 const express = require('express');
-const medicineDB = require('../models/eventSchema');
 const staffDB = require('../models/staffSchema');
 const bookingsDB = require('../models/bookingSchema');
 const eventDB = require('../models/eventSchema');
@@ -22,7 +21,7 @@ cloudinary.config({
 const storage = new CloudinaryStorage({
   cloudinary: cloudinary,
   params: {
-    folder: 'vatakara projects/medicine management',
+    folder: 'vatakara projects/event management',
   },
 });
 const upload = multer({ storage: storage });
@@ -90,7 +89,7 @@ staffRoutes.post('/add-product', upload.single('image'), async (req, res) => {
         Error: false,
         data: Data,
         Message: 'Products added successfully',
-        // return res.render('add-turf', { data });
+        // return res.render('add-product', { data });
       });
     } else {
       return res.status(400).json({
@@ -101,9 +100,9 @@ staffRoutes.post('/add-product', upload.single('image'), async (req, res) => {
       // const data = {
       //   Success: false,
       //   Error: true,
-      //   Message: 'Failed adding turf ',
+      //   Message: 'Failed adding Products ',
       // };
-      // return res.ren.der('add-turf', { data });
+      // return res.ren.der('add-product', { data });
     }
   } catch (error) {
     return res.status(500).json({
@@ -244,20 +243,20 @@ staffRoutes.post('/add-event', upload.single('image'), async (req, res) => {
         Error: false,
         data: Data,
         Message: 'Event added successfully',
-        // return res.render('add-turf', { data });
+        // return res.render('add-product', { data });
       });
     } else {
       return res.status(400).json({
         Success: false,
         Error: true,
-        Message: 'Failed adding Medicine ',
+        Message: 'Failed adding Event ',
       });
       // const data = {
       //   Success: false,
       //   Error: true,
-      //   Message: 'Failed adding turf ',
+      //   Message: 'Failed adding product ',
       // };
-      // return res.ren.der('add-turf', { data });
+      // return res.ren.der('add-product', { data });
     }
   } catch (error) {
     return res.status(500).json({
@@ -376,19 +375,48 @@ staffRoutes.get('/delete-event/:id', async (req, res) => {
 
 staffRoutes.get('/view-bookings', async (req, res) => {
   try {
-    const bookings = await bookingsDB.find();
+    // const bookings = await bookingsDB.find();
+    const bookings = await bookingsDB.aggregate([
+      {
+        $lookup: {
+          from: 'events_tbs',
+          localField: 'event_id',
+          foreignField: '_id',
+          as: 'events_data',
+        },
+      },
+      {
+        $unwind: {
+          path: '$events_data',
+        },
+      },
+      {
+        $lookup: {
+          from: 'login_tbs',
+          localField: 'login_id',
+          foreignField: '_id',
+          as: 'login_data',
+        },
+      },
+      {
+        $unwind: {
+          path: '$login_data',
+        },
+      },
+    ]);
+
     if (bookings) {
       return res.status(200).json({
         Success: true,
         Error: false,
         data: bookings.length > 0 ? bookings : [],
-        Message: 'Product fetched from cart successfully',
+        Message: 'Events fetched successfully',
       });
     } else {
       return res.status(400).json({
         Success: false,
         Error: true,
-        Message: 'Product fetching from cart failed',
+        Message: 'Events fetching failed',
       });
     }
   } catch (error) {
