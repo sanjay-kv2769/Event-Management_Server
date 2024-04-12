@@ -12,7 +12,8 @@ const staffRoutes = require('./src/routes/staffRoutes');
 
 mongoose
   .connect(
-    'mongodb+srv://maitexaSS:EPZh8v1m2U0thLE2@vproject.p2z0nmk.mongodb.net/Event_Management_System'
+    'mongodb+srv://akshaysanthosh001:6CWSM0cgKLV2mlQt@cluster0.dbbigvk.mongodb.net/Event_Management_System'
+    // 'mongodb+srv://maitexaSS:EPZh8v1m2U0thLE2@vproject.p2z0nmk.mongodb.net/Event_Management_System'
   )
   .then(() => {
     console.log('Database Connected');
