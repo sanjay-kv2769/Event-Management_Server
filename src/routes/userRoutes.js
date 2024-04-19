@@ -555,6 +555,7 @@ userRoutes.post('/add-complaint/:login_id', async (req, res) => {
     const Complaint = {
       login_id: req.params.login_id,
       complaint: req.body.complaint,
+      date:req.body.date
     };
     const Data = await complaintsDB(Complaint).save();
     // console.log(Data);
