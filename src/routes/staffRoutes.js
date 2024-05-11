@@ -118,7 +118,9 @@ staffRoutes.put('/update-product/:id', async (req, res) => {
   try {
     
     console.log("body:",req.body)
+     console.log("name:",req.body.name)
     const previousData = await productsDB.findOne({ _id: req.params.id });
+    console.log("previousData:",previousData)
 
     var Products = {
       name: req.body ? req.body.name : previousData.name,
