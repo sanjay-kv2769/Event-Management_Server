@@ -117,7 +117,7 @@ staffRoutes.post('/add-product', upload.single('image'), async (req, res) => {
 staffRoutes.post('/update-product', async (req, res) => {
   try {
     
-    console.log(req.body)
+    console.log("body:",req.body)
     const previousData = await productsDB.findOne({ _id: req.body.id });
 
     var Products = {
@@ -148,6 +148,7 @@ staffRoutes.post('/update-product', async (req, res) => {
       });
     }
   } catch (error) {
+    console.log(error.message)
     return res.status(500).json({
       Success: false,
       Error: true,
