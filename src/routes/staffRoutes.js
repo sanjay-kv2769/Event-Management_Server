@@ -116,6 +116,7 @@ staffRoutes.post('/add-product', upload.single('image'), async (req, res) => {
 
 staffRoutes.put('/update-product/:id', async (req, res) => {
   try {
+    console.log(req.body)
     const previousData = await productsDB.findOne({ _id: req.params.id });
 
     var Products = {
@@ -125,7 +126,7 @@ staffRoutes.put('/update-product/:id', async (req, res) => {
       description: req.body ? req.body.description : previousData.description,
       image: req.file ? req.file.path : previousData.image,
     };
-    // console.log(Products);
+     console.log(Products);
     const Data = await productsDB.updateOne(
       { _id: req.params.id },
       { $set: Products }
