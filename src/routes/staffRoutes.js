@@ -114,7 +114,7 @@ staffRoutes.post('/add-product', upload.single('image'), async (req, res) => {
   }
 });
 
-staffRoutes.put('/update-product/:id',,
+staffRoutes.put('/update-product/:id',
   upload.single('image'), async (req, res) => {
   try {
     
