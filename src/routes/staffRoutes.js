@@ -274,7 +274,7 @@ staffRoutes.post('/add-event', upload.single('image'), async (req, res) => {
   }
 });
 
-staffRoutes.put('/update-event/:id',,
+staffRoutes.put('/update-event/:id',
   upload.single('image'), async (req, res) => {
   try {
     const previousData = await eventDB.findOne({ _id: req.params.id });
