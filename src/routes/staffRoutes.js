@@ -114,7 +114,8 @@ staffRoutes.post('/add-product', upload.single('image'), async (req, res) => {
   }
 });
 
-staffRoutes.put('/update-product/:id', async (req, res) => {
+staffRoutes.put('/update-product/:id',,
+  upload.single('image'), async (req, res) => {
   try {
     
     console.log("body:",req.body)
@@ -123,10 +124,10 @@ staffRoutes.put('/update-product/:id', async (req, res) => {
     console.log("previousData:",previousData)
 
     var Products = {
-      name: req.body ? req.body.name : previousData.name,
-      color: req.body ? req.body.color : previousData.color,
-      price: req.body ? req.body.price : previousData.price,
-      description: req.body ? req.body.description : previousData.description,
+      name: req.body.name ? req.body.name : previousData.name,
+      color: req.body.color ? req.body.color : previousData.color,
+      price: req.body.price ? req.body.price : previousData.price,
+      description: req.body.description ? req.body.description : previousData.description,
       image: req.file ? req.file.path : previousData.image,
     };
      console.log(Products);
@@ -273,14 +274,15 @@ staffRoutes.post('/add-event', upload.single('image'), async (req, res) => {
   }
 });
 
-staffRoutes.put('/update-event/:id', async (req, res) => {
+staffRoutes.put('/update-event/:id',,
+  upload.single('image'), async (req, res) => {
   try {
     const previousData = await eventDB.findOne({ _id: req.params.id });
 
     var Events = {
-      event_type: req.body ? req.body.event_type : previousData.event_type,
-      description: req.body ? req.body.description : previousData.description,
-      price: req.body ? req.body.price : previousData.price,
+      event_type: req.body.event_type ? req.body.event_type : previousData.event_type,
+      description: req.body.description ? req.body.description : previousData.description,
+      price: req.body.price ? req.body.price : previousData.price,
       image: req.file ? req.file.path : previousData.image,
     };
     // console.log(Events);
