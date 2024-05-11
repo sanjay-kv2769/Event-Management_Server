@@ -114,10 +114,11 @@ staffRoutes.post('/add-product', upload.single('image'), async (req, res) => {
   }
 });
 
-staffRoutes.put('/update-product/:id', async (req, res) => {
+staffRoutes.post('/update-product', async (req, res) => {
   try {
+    
     console.log(req.body)
-    const previousData = await productsDB.findOne({ _id: req.params.id });
+    const previousData = await productsDB.findOne({ _id: req.body.id });
 
     var Products = {
       name: req.body ? req.body.name : previousData.name,
@@ -128,7 +129,7 @@ staffRoutes.put('/update-product/:id', async (req, res) => {
     };
      console.log(Products);
     const Data = await productsDB.updateOne(
-      { _id: req.params.id },
+      { _id: req.body.id },
       { $set: Products }
     );
 
